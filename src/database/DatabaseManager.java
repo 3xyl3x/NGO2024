@@ -22,7 +22,7 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
             System.exit(1);
         }
-        this.db = db;
+
     }
      
     public ArrayList<HashMap<String, String>> getEmployees() {

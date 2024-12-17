@@ -36,14 +36,12 @@ public class LoginPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
-        inputName.setText("jTextField1");
         inputName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputNameActionPerformed(evt);
             }
         });
 
-        inputPassword.setText("jTextField1");
         inputPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputPasswordActionPerformed(evt);
