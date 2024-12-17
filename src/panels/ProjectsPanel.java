@@ -6,7 +6,7 @@ package panels;
 
 import database.DatabaseManager;
 import java.util.ArrayList;
-import java.util.HashMap;
+import models.*;
 
 /**
  *
@@ -25,14 +25,13 @@ public class ProjectsPanel extends javax.swing.JPanel {
         listProjects();
     }
 
-        private void listProjects() {
-               ArrayList<HashMap<String, String>> projects = dbm.getProjects();
+    private void listProjects() {
+               ArrayList<Project> projects = dbm.getProjects();
 
             jTextArea1.setText(""); // Rensa tidigare text
             if (projects != null) {
-                for (HashMap<String, String> rad : projects) {
-   
-                    jTextArea1.append("ID: " + rad.get("pid") + ", Namn: " + rad.get("projektnamn")+" "+rad.get("beskrivning") + "\n");
+                for (Project project : projects) {
+                    jTextArea1.append(project.toString()+ "\n");
                 }
             } else {
                 jTextArea1.setText("Inga projekt hittades.");

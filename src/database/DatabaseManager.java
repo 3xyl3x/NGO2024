@@ -1,6 +1,6 @@
 package database;
-import oru.inf.InfDB;
-import oru.inf.InfException;
+import oru.inf.*;
+import models.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 /*
@@ -24,23 +24,42 @@ public class DatabaseManager {
         }
 
     }
-     
-    public ArrayList<HashMap<String, String>> getEmployees() {
+    
+    // Metod för att hämta alla anställda
+    public ArrayList<Employee> getEmployees() {
+        ArrayList<Employee> employeesList = new ArrayList<>();
         String query = "SELECT * FROM anstalld";
+
         try {
-            return db.fetchRows(query); 
+            ArrayList<HashMap<String, String>> results = db.fetchRows(query);
+
+            if (results != null) {
+                for (HashMap<String, String> row : results) {
+                    employeesList.add(new Employee(row.get("aid"), row.get("fornamn"), row.get("efternamn")));
+                }
+            }
         } catch (InfException e) {
-            System.err.println("Problem att hämta anställda: " + e.getMessage());
-            return new ArrayList<>(); 
+            System.err.println("KUNDE INTE HÄMTA ANSTÄLLDA: " + e.getMessage());
         }
+        return employeesList;
     }
-    public ArrayList<HashMap<String, String>> getProjects() {
-    String query = "SELECT * FROM projekt";
-    try {
-        return db.fetchRows(query); 
-    } catch (InfException e) {
-        System.err.println("Problem att hämta projekt: " + e.getMessage());
-        return new ArrayList<>(); 
+    
+        // Metod för att hämta alla projekt
+    public ArrayList<Project> getProjects() {
+        ArrayList<Project> projectsList = new ArrayList<>();
+        String query = "SELECT * FROM projekt";
+
+        try {
+            ArrayList<HashMap<String, String>> results = db.fetchRows(query);
+
+            if (results != null) {
+                for (HashMap<String, String> row : results) {
+                    projectsList.add(new Project(row.get("pid"), row.get("projektnamn"), row.get("beskrivning")));
+                }
+            }
+        } catch (InfException e) {
+            System.err.println("KUNDE INTE HÄMTA PROJEKT: " + e.getMessage());
+        }
+        return projectsList;
     }
-}
 }

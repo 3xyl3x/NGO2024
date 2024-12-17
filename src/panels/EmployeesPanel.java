@@ -6,6 +6,7 @@ package panels;
 import database.DatabaseManager;
 import java.util.ArrayList;
 import java.util.HashMap; 
+import models.Employee;
 
 /**
  *
@@ -25,13 +26,12 @@ public class EmployeesPanel extends javax.swing.JPanel {
     }
     
     private void listEmployees() {
-               ArrayList<HashMap<String, String>> anstallda = dbm.getEmployees();
+               ArrayList<Employee> employees = dbm.getEmployees();
 
             jTextArea1.setText(""); // Rensa tidigare text
-            if (anstallda != null) {
-                for (HashMap<String, String> rad : anstallda) {
-   
-                    jTextArea1.append("ID: " + rad.get("aid") + ", Namn: " + rad.get("fornamn")+" "+rad.get("efternamn") + "\n");
+            if (employees != null) {
+                for (Employee employee : employees) {
+                    jTextArea1.append(employee.toString()+ "\n");
                 }
             } else {
                 jTextArea1.setText("Inga anställda hittades.");
