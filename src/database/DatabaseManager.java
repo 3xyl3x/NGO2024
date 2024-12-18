@@ -3,6 +3,7 @@ import oru.inf.*;
 import models.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import util.ErrorHandler;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -35,7 +36,15 @@ public class DatabaseManager {
 
             if (results != null) {
                 for (HashMap<String, String> row : results) {
-                    employeesList.add(new Employee(row.get("aid"), row.get("fornamn"), row.get("efternamn")));
+                    employeesList.add(new Employee(
+                            Integer.parseInt(row.get("aid")),
+                            row.get("fornamn"),
+                            row.get("efternamn"),
+                            row.get("adress"),
+                            row.get("epost"),
+                            row.get("telefon"),
+                            row.get("anstallningsdatum")
+                    ));
                 }
             }
         } catch (InfException e) {
@@ -61,5 +70,17 @@ public class DatabaseManager {
             System.err.println("KUNDE INTE HÄMTA PROJEKT: " + e.getMessage());
         }
         return projectsList;
+    }
+    
+    public boolean deleteEmployee(int id) {
+  
+        try {
+            db.delete("DELETE FROM anstalld WHERE aid = '"+id+"'");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning: " + e.getMessage());
+            return false;
+        }
+ 
     }
 }

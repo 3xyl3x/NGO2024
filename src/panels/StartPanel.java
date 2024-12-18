@@ -15,7 +15,7 @@ public class StartPanel extends javax.swing.JPanel {
      * Creates new form StartPanel
      */
     public StartPanel(MainWindow window) {
-          this.window=window;
+        this.window=window;
         initComponents();
     }
 
@@ -30,6 +30,7 @@ public class StartPanel extends javax.swing.JPanel {
 
         employeesButton = new javax.swing.JButton();
         projectsButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         employeesButton.setBackground(new java.awt.Color(0, 0, 153));
         employeesButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -51,16 +52,27 @@ public class StartPanel extends javax.swing.JPanel {
             }
         });
 
+        logoutButton.setText("Logga ut");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(105, 105, 105)
                 .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addGap(129, 129, 129))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,21 +81,28 @@ public class StartPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addGap(145, 145, 145)
+                .addComponent(logoutButton)
+                .addContainerGap(295, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void employeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesButtonActionPerformed
-        window.showPanel("EmployeesPanel");
+        window.showEmployeesPanel();
     }//GEN-LAST:event_employeesButtonActionPerformed
 
     private void projectsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsButtonActionPerformed
-          window.showPanel("ProjectsPanel");
+        window.showProjectsPanel();
     }//GEN-LAST:event_projectsButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+         window.showLoginPanel();
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton employeesButton;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JButton projectsButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,7 +36,7 @@
                   <Component id="jLabel1" min="-2" pref="115" max="-2" attributes="0"/>
                   <Component id="goBackButton" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="184" max="32767" attributes="0"/>
+              <EmptySpace pref="179" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -103,7 +103,6 @@
     <Component class="javax.swing.JButton" name="newEmployeeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ny anst&#xe4;lld"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newEmployeeButtonActionPerformed"/>
@@ -111,15 +110,21 @@
     </Component>
     <Component class="javax.swing.JButton" name="editEmployeeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc4;ndra anst&#xe4;lld"/>
+        <Property name="text" type="java.lang.String" value="Hantera anst&#xe4;lld"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editEmployeeButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deleteEmployeeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Radera anst&#xe4;lld"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteEmployeeButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

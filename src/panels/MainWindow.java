@@ -11,40 +11,52 @@ package panels;
  */
 
 import database.DatabaseManager;
-import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.*;
+import java.awt.*;
+import models.*;
 
 public class MainWindow extends javax.swing.JFrame {
 
-    private CardLayout cardLayout;
     private JPanel mainPanel;
-
+    private DatabaseManager dbm;
     public MainWindow(DatabaseManager dbm) {
-   
+  
         setTitle("Testprojekt V1");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          
-        // CardLayout för att hantera paneler
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
-
-
-        // Lägg till olika paneler
-        mainPanel.add(new LoginPanel(this), "Login");
-        mainPanel.add(new StartPanel(this), "StartPanel");
-        mainPanel.add(new EmployeesPanel(this,dbm), "EmployeesPanel");
-        mainPanel.add(new ProjectsPanel(this,dbm), "ProjectsPanel");
-        // Lägg till huvudpanelen i fönstret
+        this.dbm=dbm;
+        mainPanel = new JPanel(new BorderLayout());
         add(mainPanel);
-
-        // Visa Loginpanelen
-         showPanel("Login");
+         showLoginPanel();
     }
 
-    public void showPanel(String panelName){
-       cardLayout.show(mainPanel, panelName);
+    public void showLoginPanel(){
+       showPanel(new LoginPanel(this));
+    }
+    public void showStartPanel(){
+       showPanel(new StartPanel(this));
+    }
+    public void showEmployeesPanel(){
+       showPanel(new EmployeesPanel(this,dbm));
+    }
+    public void showProjectsPanel(){
+       showPanel(new ProjectsPanel(this,dbm));
+    }
+    public void showManageEmployeePanel(Employee employee){
+       showPanel(new ManageEmployeePanel(this,dbm,employee));
+    }
+
+    private void showPanel(JPanel newPanel) {
+        // Rensa mainPanel
+        mainPanel.removeAll();
+
+        // Lägg till den nya panelen
+        mainPanel.add(newPanel, BorderLayout.CENTER);
+
+        // Uppdatera layouten
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
     /**
      * This method is called from within the constructor to initialize the form.

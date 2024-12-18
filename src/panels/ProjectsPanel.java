@@ -97,7 +97,7 @@ public class ProjectsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
-         window.showPanel("StartPanel");
+         window.showStartPanel();
     }//GEN-LAST:event_goBackButtonActionPerformed
 
 

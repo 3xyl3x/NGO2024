@@ -7,6 +7,7 @@ import database.DatabaseManager;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel; 
 import models.Employee;
+import util.ErrorHandler;
 
 /**
  *
@@ -73,18 +74,27 @@ public class EmployeesPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(employeeList);
 
         newEmployeeButton.setText("Ny anställd");
-        newEmployeeButton.setEnabled(false);
         newEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newEmployeeButtonActionPerformed(evt);
             }
         });
 
-        editEmployeeButton.setText("Ändra anställd");
+        editEmployeeButton.setText("Hantera anställd");
         editEmployeeButton.setEnabled(false);
+        editEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editEmployeeButtonActionPerformed(evt);
+            }
+        });
 
         deleteEmployeeButton.setText("Radera anställd");
         deleteEmployeeButton.setEnabled(false);
+        deleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEmployeeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,7 +112,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
                             .addComponent(newEmployeeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(goBackButton))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +135,7 @@ public class EmployeesPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
-           window.showPanel("StartPanel");
+        window.showStartPanel();
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     private void newEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newEmployeeButtonActionPerformed
@@ -139,6 +149,26 @@ public class EmployeesPanel extends javax.swing.JPanel {
        editEmployeeButton.setEnabled(isSelected);
        deleteEmployeeButton.setEnabled(isSelected);
     }//GEN-LAST:event_employeeListValueChanged
+
+    private void editEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEmployeeButtonActionPerformed
+        Employee selectedEmployee = employeeList.getSelectedValue();
+        window.showManageEmployeePanel(selectedEmployee);
+    }//GEN-LAST:event_editEmployeeButtonActionPerformed
+
+    private void deleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeButtonActionPerformed
+       Employee selectedEmployee = employeeList.getSelectedValue();
+       boolean confirm = ErrorHandler.showConfirmation(this,"Bekräfta radering av "+selectedEmployee.getFirstName()+" "+selectedEmployee.getLastName());
+
+        if (confirm) {
+            
+                if(dbm.deleteEmployee(selectedEmployee.getId())) {
+                listModel.removeElement(selectedEmployee);
+                ErrorHandler.showInfo(this, "Anställd raderad!");
+                }else {
+                ErrorHandler.showError(this, false, "Kunde inte radera anställd!");
+            }
+        }
+    }//GEN-LAST:event_deleteEmployeeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

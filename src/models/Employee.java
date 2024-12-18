@@ -10,16 +10,24 @@ package models;
  * @author david
  */
 public class Employee {
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
-    public Employee(String id, String firstName, String lastName) {
+    private String address;
+    private String email;
+    private String phone;
+    private String employmentDate;
+    public Employee(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.address = address;
+        this.email= email;
+        this.phone = phone;
+        this.employmentDate = employmentDate;
     }
     
-      public String getId() {
+      public int getId() {
         return id;
     }
 
@@ -27,7 +35,22 @@ public class Employee {
         return firstName;
     }
     public String getLastName() {
-        return firstName;
+        return lastName;
+    }
+    public String getAddress() {
+    return address;
+}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmploymentDate() {
+        return employmentDate;
     }
     public String toString() {
         return "ID: " + id + ", Namn: " + firstName + " " + lastName;
