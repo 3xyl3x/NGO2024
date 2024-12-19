@@ -28,11 +28,7 @@ public class Partner {
     public int getPartnerId() {
         return partnerId;
     }
-
-    public void setPartnerId(int newPartnerId) {
-        partnerId = newPartnerId;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -91,6 +87,6 @@ public class Partner {
 
     @Override
     public String toString() {
-        return partnerId + " , " + name + " , " + contactPerson + " , " + phoneNumber + ".";
+        return "ID: " + partnerId + ", Namn:  " + name + ", Kontaktperson:  " + contactPerson + " telefonnummer: " + phoneNumber + ".";
     }
 }
