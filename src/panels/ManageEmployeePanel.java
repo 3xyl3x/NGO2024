@@ -46,7 +46,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         firstNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lastNameTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        saveChangesButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         addressTextField = new javax.swing.JTextField();
@@ -65,10 +65,10 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
         jLabel3.setText("Efternamn:");
 
-        jButton1.setText("Spara ändringar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveChangesButton.setText("Spara ändringar");
+        saveChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveChangesButtonActionPerformed(evt);
             }
         });
 
@@ -86,7 +86,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(goBackButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(saveChangesButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -115,7 +115,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(goBackButton)
-                    .addComponent(jButton1))
+                    .addComponent(saveChangesButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
@@ -142,9 +142,9 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         window.showEmployeesPanel();
     }//GEN-LAST:event_goBackButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveChangesButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -152,12 +152,12 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JButton goBackButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField lastNameTextField;
+    private javax.swing.JButton saveChangesButton;
     // End of variables declaration//GEN-END:variables
 }

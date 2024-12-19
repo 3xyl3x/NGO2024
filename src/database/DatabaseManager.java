@@ -25,7 +25,7 @@ public class DatabaseManager {
         }
 
     }
-    
+
     // Metod för att hämta alla anställda
     public ArrayList<Employee> getEmployees() {
         ArrayList<Employee> employeesList = new ArrayList<>();
