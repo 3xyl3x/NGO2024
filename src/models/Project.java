@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 public class Project {
 
-    private String id;
+    private int projectId;
     private String title;
     private String description;
     private LocalDate startDate;
@@ -19,21 +19,22 @@ public class Project {
     private int projectManager;
     private int country;
 
-    public Project(String id, String title, String description, LocalDate startDate, LocalDate endDate, int cost, String status, String priority, int projectManager, int country) {
-        this.id = id;
+    public Project(int projectId, String title, String description, String startDate, String endDate, int cost, String status, String priority, int projectManager, int country) {
+        this.projectId = projectId;
         this.title = title;
         this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
         this.cost = cost;
         this.status = status;
         this.priority = priority;
         this.projectManager = projectManager;
         this.country = country;
     }
+    
 
-    public String getId() {
-        return id;
+    public int getProjektId() {
+        return projectId;
     }
 
     public String getTitle() {
@@ -52,7 +53,7 @@ public class Project {
         description = newDescription;
     }
 
-    public LocalDate getstartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
@@ -109,6 +110,6 @@ public class Project {
     }
 
     public String toString() {
-        return "ID: " + id + ", Namn: " + title + ", Prioritering " + priority + ", info: " + description + ".";
+        return "ID: " + projectId + ", Namn: " + title + ", Prioritering " + priority + ", info: " + description + ".";
     }
 }
