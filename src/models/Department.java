@@ -9,6 +9,8 @@ package models;
  * @author leia
  */
 
+import java.util.ArrayList;
+
 public class Department {
     private int id;
     private String name;
@@ -16,6 +18,9 @@ public class Department {
     private String phone;
     private String adress;
     private String mail;
+    
+      private ArrayList<Employee> employees;
+      private ArrayList<Project> projects;
     
     public Department(int id, String name, String description, String phone, String adress, String mail)
             {
@@ -25,6 +30,9 @@ public class Department {
             this.phone = phone;
             this.adress = adress;
             this.mail = mail;
+            
+            this.employees = new ArrayList<>();
+            this.projects = new ArrayList<>();
             }
     
     
@@ -86,11 +94,17 @@ public class Department {
     
     public void listAllEmployees()
     {
-    System.out.println();
+    System.out.println("Employees of the department " + name + ": ");
+        for (Employee employee : employees) {
+            System.out.println(employee.getFirstName()); 
+    }
     }
     
     public void listAllProjects()
     {
-    System.out.println();
+    System.out.println("Projects connected to the department " + name + ":");
+    for (Project project : projects) {
+        System.out.println(project.getTitle()); 
+    }
     }
 }
