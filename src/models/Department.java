@@ -53,4 +53,44 @@ public class Department {
             return mail;
     }
     
+    public void newName(String name)
+    {
+          this.name = name;
+          System.out.println("The name of the department has been changed to: " + this.name);
+    }
+    
+    public void newDescription(String description)
+    {
+          this.description = description;
+          System.out.println("New description of the department: " + this.description);
+    }
+    
+    public void newPhone(String phone)
+    {
+          this.phone = phone;
+          System.out.println("The phonenumber of the department has been changed to: " + this.phone);
+    }
+    
+    public void newAdress(String adress)
+    {
+          this.adress = adress;
+          System.out.println("The departments adress has been changed to: " + this.adress);
+    }
+    
+    public void newMail(String mail)
+    {
+          this.mail = mail;
+          System.out.println("The mail to the department has been changed to: " + this.mail);
+    }
+    
+    
+    public void listAllEmployees()
+    {
+    System.out.println();
+    }
+    
+    public void listAllProjects()
+    {
+    System.out.println();
+    }
 }
