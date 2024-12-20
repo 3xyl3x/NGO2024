@@ -1,4 +1,6 @@
 package panels;
+import database.DatabaseManager;
+import models.*;
 import static util.ErrorHandler.*;
 import static util.Validator.*;
 
@@ -14,11 +16,13 @@ import static util.Validator.*;
 
 public class LoginPanel extends javax.swing.JPanel {
     private MainWindow window;
+    private DatabaseManager dbm;
     /**
      * Creates new form LoginPanel
      */
-    public LoginPanel(MainWindow window) {
+    public LoginPanel(MainWindow window,DatabaseManager dbm) {
         this.window=window;
+        this.dbm = dbm;
         initComponents();
     }
 
@@ -36,6 +40,8 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
+        DEVprefillManagerButton = new javax.swing.JButton();
+        DEVprefillAdminButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
@@ -56,26 +62,50 @@ public class LoginPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Lösenord:");
 
+        DEVprefillManagerButton.setBackground(new java.awt.Color(255, 0, 0));
+        DEVprefillManagerButton.setText("DEV - Prefill Manager");
+        DEVprefillManagerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DEVprefillManagerButtonActionPerformed(evt);
+            }
+        });
+
+        DEVprefillAdminButton.setBackground(new java.awt.Color(255, 0, 0));
+        DEVprefillAdminButton.setText("DEV - Prefill Admin");
+        DEVprefillAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DEVprefillAdminButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(216, 216, 216)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DEVprefillManagerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DEVprefillAdminButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(inputPassword))
-                .addContainerGap(245, Short.MAX_VALUE))
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inputEmail)
+                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(118, 118, 118)
+                .addComponent(DEVprefillManagerButton)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(DEVprefillAdminButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
@@ -83,7 +113,7 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginButton)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -93,14 +123,32 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
        if(textFieldHasValue(inputEmail)&& textFieldHasValue(inputPassword)) {
-           window.showStartPanel();
+           Employee user = dbm.login(inputEmail.getText(),inputPassword.getText()); 
+           if (user!=null) {
+                window.setUser(user);
+                window.showStartPanel();
+           } else {
+                showInfo(this, "Epost eller lösenord stämmer inte");
+           }
        } else {
            showInfo(this, "Fyll i epost och lösenord");
        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    private void DEVprefillManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEVprefillManagerButtonActionPerformed
+        inputEmail.setText("chen.liu@example.com");
+        inputPassword.setText("passwordabc");
+    }//GEN-LAST:event_DEVprefillManagerButtonActionPerformed
+
+    private void DEVprefillAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEVprefillAdminButtonActionPerformed
+           inputEmail.setText("michael.j@example.com");
+        inputPassword.setText("password789");
+    }//GEN-LAST:event_DEVprefillAdminButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DEVprefillAdminButton;
+    private javax.swing.JButton DEVprefillManagerButton;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputPassword;
     private javax.swing.JLabel jLabel1;

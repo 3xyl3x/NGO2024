@@ -17,9 +17,9 @@ import java.awt.*;
 import models.*;
 
 public class MainWindow extends javax.swing.JFrame {
-
     private JPanel mainPanel;
     private DatabaseManager dbm;
+    private Employee user;
     public MainWindow(DatabaseManager dbm) {
   
         setTitle("Testprojekt V1");
@@ -30,21 +30,24 @@ public class MainWindow extends javax.swing.JFrame {
         add(mainPanel);
          showLoginPanel();
     }
+    public void setUser(Employee user) {
+        this.user = user;
+    }
 
     public void showLoginPanel(){
-       showPanel(new LoginPanel(this));
+       showPanel(new LoginPanel(this,dbm));
     }
     public void showStartPanel(){
-       showPanel(new StartPanel(this));
+       showPanel(new StartPanel(this,user));
     }
     public void showEmployeesPanel(){
-       showPanel(new EmployeesPanel(this,dbm));
+       showPanel(new EmployeesListPanel(this,dbm));
     }
     public void showProjectsPanel(){
-       showPanel(new ProjectsPanel(this,dbm));
+       showPanel(new ProjectsListPanel(this,dbm));
     }
     public void showManageEmployeePanel(Employee employee){
-       showPanel(new ManageEmployeePanel(this,dbm,employee));
+       showPanel(new EmployeePanel(this,dbm,employee));
     }
 
     private void showPanel(JPanel newPanel) {
