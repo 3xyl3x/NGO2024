@@ -51,7 +51,7 @@ public String getName()
 {
     return name;
 }
-public String getNumber()
+public int getNumber()
 {
     return number;
 }
@@ -59,10 +59,8 @@ public String getDescription()
 {
     return description;
 }
-public String getPriority()
+public int getPriority()
 {
     return priority;
-}
-
 }
 }
