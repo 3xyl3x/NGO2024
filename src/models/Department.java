@@ -9,32 +9,24 @@ package models;
  * @author leia
  */
 
-import java.util.ArrayList;
 
 public class Department {
     private int id;
     private String name;
     private String description;
     private String phone;
-    private String adress;
+    private String address;
     private String mail;
     
-      private ArrayList<Employee> employees;
-      private ArrayList<Project> projects;
-    
-    public Department(int id, String name, String description, String phone, String adress, String mail)
+    public Department(int id, String name, String description, String phone, String address, String email)
             {
             this.id = id;
             this.name = name;
             this.description = description;
             this.phone = phone;
-            this.adress = adress;
-            this.mail = mail;
-            
-            this.employees = new ArrayList<>();
-            this.projects = new ArrayList<>();
+            this.address = address;
+            this.email = email;
             }
-    
     
     public String getName()
     {
@@ -56,54 +48,38 @@ public class Department {
             return adress;
     }
     
-    public String getMail()
+    public String getEmail()
     {
-            return mail;
+            return email;
     }
     
-    public void changeName(String name)
+    public void setName(String name)
     {
           this.name = name;
           System.out.println("The name of the department has been changed to: " + this.name);
     }
     
-    public void changeDescription(String description)
+    public void setDescription(String description)
     {
           this.description = description;
           System.out.println("New description of the department: " + this.description);
     }
     
-    public void changePhone(String phone)
+    public void setPhone(String phone)
     {
           this.phone = phone;
           System.out.println("The phonenumber of the department has been changed to: " + this.phone);
     }
     
-    public void changeAdress(String adress)
+    public void setAdress(String adress)
     {
           this.adress = adress;
           System.out.println("The departments adress has been changed to: " + this.adress);
     }
     
-    public void changeMail(String mail)
+    public void setMail(String mail)
     {
           this.mail = mail;
           System.out.println("The mail to the department has been changed to: " + this.mail);
     }
     
-    public void listAllEmployees()
-    {
-    System.out.println("Employees of the department " + name + ": ");
-        for (Employee employee : employees) {
-            System.out.println(employee.getLastName() + ", " + employee.getFirstName()); 
-        }
-    }
-    
-    public void listAllProjects()
-    {
-    System.out.println("Projects connected to the department " + name + ":");
-    for (Project project : projects) {
-      //  System.out.println(project.title()); 
-    }
-    }
-}
