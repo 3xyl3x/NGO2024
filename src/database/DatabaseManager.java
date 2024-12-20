@@ -138,7 +138,7 @@ public class DatabaseManager {
 
             if (results != null) {
                 for (HashMap<String, String> row : results) {
-                    projectsList.add(new Project(row.get("pid"), row.get("projektnamn"), row.get("beskrivning")));
+                 //   projectsList.add(new Project(row.get("pid"), row.get("projektnamn"), row.get("beskrivning")));
                 }
             }
         } catch (InfException e) {
