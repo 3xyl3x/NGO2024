@@ -41,13 +41,13 @@ public class MainWindow extends javax.swing.JFrame {
        showPanel(new StartPanel(this,user));
     }
     public void showEmployeesPanel(){
-       showPanel(new EmployeesPanel(this,dbm));
+       showPanel(new EmployeesListPanel(this,dbm));
     }
     public void showProjectsPanel(){
-       showPanel(new ProjectsPanel(this,dbm));
+       showPanel(new ProjectsListPanel(this,dbm));
     }
     public void showManageEmployeePanel(Employee employee){
-       showPanel(new ManageEmployeePanel(this,dbm,employee));
+       showPanel(new EmployeePanel(this,dbm,employee));
     }
 
     private void showPanel(JPanel newPanel) {

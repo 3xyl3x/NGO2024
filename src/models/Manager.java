@@ -12,8 +12,8 @@ public class Manager extends Employee {
     private String responsibilityArea;
     private Manager mentor;
 
-    public Manager(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate,String responsibilityArea,Manager mentor) {
-        super(id, firstName, lastName, address, email, phone, employmentDate);
+    public Manager(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate,int departmentID,String responsibilityArea,Manager mentor) {
+        super(id, firstName, lastName, address, email, phone, employmentDate,departmentID);
         this.responsibilityArea = responsibilityArea;
         this.mentor=mentor;
     }

@@ -103,7 +103,7 @@ public class Department {
     {
     System.out.println("Projects connected to the department " + name + ":");
     for (Project project : projects) {
-        System.out.println(project.title()); 
+      //  System.out.println(project.title()); 
     }
     }
 }

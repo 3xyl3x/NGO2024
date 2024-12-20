@@ -13,12 +13,12 @@ import util.ErrorHandler;
  *
  * @author david
  */
-public class EmployeesPanel extends javax.swing.JPanel {
+public class EmployeesListPanel extends javax.swing.JPanel {
  private MainWindow window;
  private DatabaseManager dbm;
  private DefaultListModel<Employee> listModel; 
 
-    public EmployeesPanel(MainWindow window,DatabaseManager dbm) {
+    public EmployeesListPanel(MainWindow window,DatabaseManager dbm) {
         this.window=window;
         this.dbm=dbm;
         initComponents();

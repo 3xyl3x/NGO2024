@@ -13,14 +13,14 @@ import models.Employee;
  *
  * @author david
  */
-public class ManageEmployeePanel extends javax.swing.JPanel {
+public class EmployeePanel extends javax.swing.JPanel {
  private MainWindow window;
  private DatabaseManager dbm;
  private Employee employee;
     /**
      * Creates new form manageEmployeePanel
      */
-    public ManageEmployeePanel(MainWindow window,DatabaseManager dbm,Employee employee) {
+    public EmployeePanel(MainWindow window,DatabaseManager dbm,Employee employee) {
         this.window=window;
         this.dbm=dbm;
         this.employee=employee;
@@ -29,6 +29,9 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         lastNameTextField.setText(employee.getLastName());
         addressTextField.setText(employee.getAddress());
         emailTextField.setText(employee.getEmail());
+        departmentTextField.setText("test");
+        departmentTextField.setText(dbm.getDepartment(employee.getDepartmentID()).getName());
+        
     }
 
     /**
@@ -51,6 +54,11 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         addressTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel7 = new javax.swing.JLabel();
+        departmentTextField = new javax.swing.JTextField();
 
         jLabel1.setText("Hantera anställd");
 
@@ -76,18 +84,36 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
         jLabel5.setText("Epost:");
 
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Projekt anställd är tilldelad");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel7.setText("Avdelning:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(goBackButton)
                         .addGap(18, 18, 18)
                         .addComponent(saveChangesButton))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -97,16 +123,21 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(addressTextField)
                                     .addComponent(lastNameTextField)
-                                    .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)))
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                                    .addComponent(departmentTextField)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                                .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel6)))))
                 .addContainerGap(263, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,7 +165,15 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(departmentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -146,9 +185,14 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveChangesButtonActionPerformed
 
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressTextField;
+    private javax.swing.JTextField departmentTextField;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JButton goBackButton;
@@ -157,6 +201,10 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JButton saveChangesButton;
     // End of variables declaration//GEN-END:variables

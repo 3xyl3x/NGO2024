@@ -5,14 +5,6 @@ import models.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-/**
- *
- * @author david
- */
 public class DatabaseManager {
 
     private InfDB db;
@@ -47,14 +39,15 @@ public class DatabaseManager {
             String email = employeeRow.get("epost");
             String phone = employeeRow.get("telefon");
             String employementDate = employeeRow.get("anstallningsdatum");
-
+            int departmentID = Integer.parseInt(employeeRow.get("avdelning"));
+            
             // Kontrollerar om användaren är handläggare
             String managerQuery = "SELECT * FROM handlaggare WHERE aid = " + id;
             HashMap<String, String> managerRow = db.fetchRow(managerQuery);
 
             if (managerRow.isEmpty() == false) {
                 String responsibilityArea = managerRow.get("ansvaromrade");
-                return new Manager(id, firstName, lastName, address, email, phone, employementDate, responsibilityArea, null);
+                return new Manager(id, firstName, lastName, address, email, phone, employementDate,departmentID, responsibilityArea, null);
             }
 
             // Kontrollerar om användaren är administratör
@@ -63,7 +56,7 @@ public class DatabaseManager {
 
             if (adminRow.isEmpty() == false) {
                 int behorighetsniva = Integer.parseInt(adminRow.get("behorighetsniva"));
-                return new Admin(id, firstName, lastName, address, email, phone, employementDate, behorighetsniva);
+                return new Admin(id, firstName, lastName, address, email, phone, employementDate,departmentID, behorighetsniva);
             }
 
             // Om ingen specifik roll hittas, returnera null
@@ -91,7 +84,8 @@ public class DatabaseManager {
                             row.get("adress"),
                             row.get("epost"),
                             row.get("telefon"),
-                            row.get("anstallningsdatum")
+                            row.get("anstallningsdatum"),
+                            Integer.parseInt(row.get("avdelning"))
                     ));
                 }
             }
@@ -100,7 +94,40 @@ public class DatabaseManager {
         }
         return employeesList;
     }
+    
+    
+    
+    // Metod för att radera en anställd
+    public boolean deleteEmployee(int id) {
+        try {
+            db.delete("DELETE FROM anstalld WHERE aid = '" + id + "'");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning: " + e.getMessage());
+            return false;
+        }
 
+    }
+    
+    // Metod för att hämta en avdelning
+    public Department getDepartment(int id) {
+            try {
+            String query = "SELECT * FROM avdelning WHERE avdid= '" + id + "'";
+            HashMap<String, String> row = db.fetchRow(query);
+
+            // Ingen avdelning hittades
+            if (row.isEmpty()) {
+                return null;
+            }
+
+                Department department = new Department(id, row.get("namn"), row.get("beskrivning"),row.get("telefon"), row.get("adress"), row.get("epost"));
+                return department;
+            }
+                            catch (InfException e) {
+            throw new RuntimeException("Fel vid inloggning: " + e.getMessage());
+        }
+    }
+    
     // Metod för att hämta alla projekt
     public ArrayList<Project> getProjects() {
         ArrayList<Project> projectsList = new ArrayList<>();
@@ -119,15 +146,33 @@ public class DatabaseManager {
         }
         return projectsList;
     }
+    
+    
+    // Metod för att hämta projekt för en anställd
+    public ArrayList<Project> getProjectsForEmployee(int employeeID) {
+    ArrayList<Project> projectsList = new ArrayList<>();
+    String query = "SELECT p.* FROM projekt p " +
+                   "JOIN ans_proj ap ON p.pid = ap.pid " +
+                   "WHERE ap.aid = " + employeeID;
 
-    public boolean deleteEmployee(int id) {
-        try {
-            db.delete("DELETE FROM anstalld WHERE aid = '" + id + "'");
-            return true;
-        } catch (InfException e) {
-            System.err.println("Fel vid borttagning: " + e.getMessage());
-            return false;
+    try {
+        ArrayList<HashMap<String, String>> results = db.fetchRows(query);
+
+        if (results != null) {
+            for (HashMap<String, String> row : results) {
+                projectsList.add(new Project(
+                    row.get("pid"), 
+                    row.get("projektnamn"), 
+                    row.get("beskrivning")
+                ));
+            }
         }
-
+    } catch (InfException e) {
+        System.err.println("KUNDE INTE HÄMTA PROJEKT FÖR ANSTÄLLD: " + e.getMessage());
     }
+    return projectsList;
+}
+
+
+
 }

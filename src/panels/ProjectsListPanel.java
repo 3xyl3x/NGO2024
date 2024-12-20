@@ -12,13 +12,13 @@ import models.*;
  *
  * @author david
  */
-public class ProjectsPanel extends javax.swing.JPanel {
+public class ProjectsListPanel extends javax.swing.JPanel {
  private MainWindow window;
   private DatabaseManager dbm;
     /**
      * Creates new form EmployeesPanel
      */
-    public ProjectsPanel(MainWindow window,DatabaseManager dbm) {
+    public ProjectsListPanel(MainWindow window,DatabaseManager dbm) {
         this.window=window;
         this.dbm=dbm;
         initComponents();
