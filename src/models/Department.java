@@ -16,7 +16,7 @@ public class Department {
     private String description;
     private String phone;
     private String address;
-    private String mail;
+    private String email;
     
     public Department(int id, String name, String description, String phone, String address, String email)
             {
@@ -43,9 +43,9 @@ public class Department {
     return phone;
     }
     
-    public String getAdress()
+    public String getAddress()
     {
-            return adress;
+            return address;
     }
     
     public String getEmail()
@@ -71,15 +71,16 @@ public class Department {
           System.out.println("The phonenumber of the department has been changed to: " + this.phone);
     }
     
-    public void setAdress(String adress)
+    public void setAdress(String address)
     {
-          this.adress = adress;
-          System.out.println("The departments adress has been changed to: " + this.adress);
+          this.address = address;
+          System.out.println("The departments adress has been changed to: " + this.address);
     }
     
-    public void setMail(String mail)
+    public void setMail(String email)
     {
-          this.mail = mail;
-          System.out.println("The mail to the department has been changed to: " + this.mail);
+          this.email = email;
+          System.out.println("The mail to the department has been changed to: " + this.email);
     }
+}
     
