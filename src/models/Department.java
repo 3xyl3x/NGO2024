@@ -43,14 +43,14 @@ public class Department {
     return phone;
     }
     
-    public String getAdress()
+    public String getAddress()
     {
-            return adress;
+            return address;
     }
     
     public String getEmail()
     {
-            return email;
+            return mail;
     }
     
     public void setName(String name)
@@ -71,10 +71,10 @@ public class Department {
           System.out.println("The phonenumber of the department has been changed to: " + this.phone);
     }
     
-    public void setAdress(String adress)
+    public void setAddress(String adress)
     {
-          this.adress = adress;
-          System.out.println("The departments adress has been changed to: " + this.adress);
+          this.address = adress;
+          System.out.println("The departments adress has been changed to: " + this.address);
     }
     
     public void setMail(String mail)
@@ -82,4 +82,4 @@ public class Department {
           this.mail = mail;
           System.out.println("The mail to the department has been changed to: " + this.mail);
     }
-    
+}
