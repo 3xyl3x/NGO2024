@@ -8,6 +8,8 @@ package models;
  *
  * @author leia
  */
+import java.util.ArrayList;
+
 
 public class Goals {
     private int id;
@@ -15,6 +17,8 @@ public class Goals {
     private int number;
     private String description;
     private int priority;
+     private static ArrayList<Goals> goalsList = new ArrayList<>();
+   
 
 public Goals(int id, String name, int number, String description, int priority)
 {
@@ -23,13 +27,19 @@ this.name = name;
 this.number = number;
 this.description = description;
 this.priority = priority;
+goalsList.add(this);
 }
 
 public void showAllInfo()
 {
+    System.out.println("List of all goals:");
+    System.out.println( ); // blankrad
+        for (Goals goal : goalsList) {
 System.out.println("Name: " + name);
-System.out.println("Number: " + number);
 System.out.println("Description: " + description);
+System.out.println("Number: " + number);
 System.out.println("Priority: " + priority);
+System.out.println( ); // blankrad
+}
 }
 }
