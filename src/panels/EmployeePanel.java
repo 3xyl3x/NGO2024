@@ -38,7 +38,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         addressTextField.setText(employee.getAddress());
         emailTextField.setText(employee.getEmail());
         departmentTextField.setText("test");
-        departmentTextField.setText(dbm.getDepartment(employee.getDepartmentID()).getName());
+        departmentTextField.setText(dbm.getDepartment(employee.getDepartmentId()).getName());
         
     }
     

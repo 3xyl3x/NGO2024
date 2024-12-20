@@ -15,11 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 import models.*;
+import util.Constants.*;
 
 public class MainWindow extends javax.swing.JFrame {
     private JPanel mainPanel;
     private DatabaseManager dbm;
     private Employee user;
+   private Role userRole;
     public MainWindow(DatabaseManager dbm) {
   
         setTitle("Testprojekt V1");
@@ -32,6 +34,11 @@ public class MainWindow extends javax.swing.JFrame {
     }
     public void setUser(Employee user) {
         this.user = user;
+        if (user instanceof Admin) {
+            this.userRole = Role.ADMIN;
+        } else {
+            this.userRole = Role.MANAGER;
+        }
     }
 
     public void showLoginPanel(){
@@ -41,13 +48,23 @@ public class MainWindow extends javax.swing.JFrame {
        showPanel(new StartPanel(this,user));
     }
     public void showEmployeesPanel(){
-       showPanel(new EmployeesListPanel(this,dbm));
+       showPanel(new EmployeesListPanel(this));
     }
     public void showProjectsPanel(){
        showPanel(new ProjectsListPanel(this,dbm));
     }
     public void showManageEmployeePanel(Employee employee){
        showPanel(new EmployeePanel(this,dbm,employee));
+    }
+    
+    public DatabaseManager getDBM() {
+        return this.dbm;
+    }
+    public Employee getUser() {
+        return this.user;
+    }
+    public Role getUserRole(){
+        return this.userRole;
     }
 
     private void showPanel(JPanel newPanel) {
