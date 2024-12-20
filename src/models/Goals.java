@@ -42,4 +42,27 @@ System.out.println("Priority: " + priority);
 System.out.println( ); // blankrad
 }
 }
+
+public int getId()
+{
+    return id;
+}
+public String getName()
+{
+    return name;
+}
+public String getNumber()
+{
+    return number;
+}
+public String getDescription()
+{
+    return description;
+}
+public String getPriority()
+{
+    return priority;
+}
+
+}
 }
