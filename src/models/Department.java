@@ -53,31 +53,31 @@ public class Department {
             return mail;
     }
     
-    public void newName(String name)
+    public void changeName(String name)
     {
           this.name = name;
           System.out.println("The name of the department has been changed to: " + this.name);
     }
     
-    public void newDescription(String description)
+    public void changeDescription(String description)
     {
           this.description = description;
           System.out.println("New description of the department: " + this.description);
     }
     
-    public void newPhone(String phone)
+    public void changePhone(String phone)
     {
           this.phone = phone;
           System.out.println("The phonenumber of the department has been changed to: " + this.phone);
     }
     
-    public void newAdress(String adress)
+    public void changeAdress(String adress)
     {
           this.adress = adress;
           System.out.println("The departments adress has been changed to: " + this.adress);
     }
     
-    public void newMail(String mail)
+    public void changeMail(String mail)
     {
           this.mail = mail;
           System.out.println("The mail to the department has been changed to: " + this.mail);
