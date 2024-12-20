@@ -1,5 +1,6 @@
 package database;
 
+import java.time.LocalDate;
 import oru.inf.*;
 import models.*;
 import java.util.ArrayList;
@@ -161,9 +162,16 @@ public class DatabaseManager {
         if (results != null) {
             for (HashMap<String, String> row : results) {
                 projectsList.add(new Project(
-                    row.get("pid"), 
+                    Integer.parseInt(row.get("pid")), 
                     row.get("projektnamn"), 
-                    row.get("beskrivning")
+                    row.get("beskrivning"),
+                    LocalDate.parse(row.get("startdatum")),
+                    LocalDate.parse(row.get("slutdatum")),  
+                    Double.parseDouble(row.get("kostnad")),
+                    row.get("status"),
+                    row.get("prioritet"),
+                    Integer.parseInt(row.get("projektchef")), 
+                    Integer.parseInt(row.get("land"))
                 ));
             }
         }
