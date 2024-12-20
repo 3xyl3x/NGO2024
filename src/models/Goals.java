@@ -63,4 +63,25 @@ public int getPriority()
 {
     return priority;
 }
+
+public void setId(int id)
+{
+    this.id = id;
+}
+public void setName(String name)
+{
+    this.name = name;
+}
+public void setNumber(int number)
+{
+    this.number = number;
+}
+public void setDescription(String description)
+{
+    this.description = description;
+}
+public void setPriority(int priority)
+{
+    this.priority = priority;
+}
 }
