@@ -4,31 +4,52 @@
  */
 package panels;
 import database.DatabaseManager;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
-import javax.swing.DefaultListModel; 
 import models.Employee;
+import models.Project;
 
 
 /**
  *
  * @author david
  */
-public class ManageEmployeePanel extends javax.swing.JPanel {
+public class EmployeePanel extends javax.swing.JPanel {
  private MainWindow window;
  private DatabaseManager dbm;
  private Employee employee;
+  private DefaultListModel<Project> listModel; 
+  
     /**
      * Creates new form manageEmployeePanel
      */
-    public ManageEmployeePanel(MainWindow window,DatabaseManager dbm,Employee employee) {
+    public EmployeePanel(MainWindow window,DatabaseManager dbm,Employee employee) {
         this.window=window;
         this.dbm=dbm;
         this.employee=employee;
         initComponents();
+        listModel = new DefaultListModel<>();
+        projectList.setModel(listModel); 
+        listProjects();
+        
         firstNameTextField.setText(employee.getFirstName());
         lastNameTextField.setText(employee.getLastName());
         addressTextField.setText(employee.getAddress());
         emailTextField.setText(employee.getEmail());
+        departmentTextField.setText("test");
+        departmentTextField.setText(dbm.getDepartment(employee.getDepartmentID()).getName());
+        
+    }
+    
+        private void listProjects() {
+               ArrayList<Project> projects = dbm.getProjectsForEmployee(employee.getId());
+
+               if (projects!=null) {
+                   for (Project project : projects) {
+                       listModel.addElement(project);
+                   }
+               }
     }
 
     /**
@@ -46,11 +67,16 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         firstNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lastNameTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        saveChangesButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         addressTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        projectList = new javax.swing.JList<>();
+        jLabel7 = new javax.swing.JLabel();
+        departmentTextField = new javax.swing.JTextField();
 
         jLabel1.setText("Hantera anställd");
 
@@ -65,10 +91,10 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
         jLabel3.setText("Efternamn:");
 
-        jButton1.setText("Spara ändringar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveChangesButton.setText("Spara ändringar");
+        saveChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveChangesButtonActionPerformed(evt);
             }
         });
 
@@ -76,20 +102,34 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
         jLabel5.setText("Epost:");
 
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Projekt anställd är tilldelad");
+
+        projectList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(projectList);
+
+        jLabel7.setText("Avdelning:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(goBackButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(saveChangesButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(127, 127, 127))
@@ -97,16 +137,21 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(addressTextField)
                                     .addComponent(lastNameTextField)
-                                    .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                                    .addComponent(departmentTextField)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                                .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel6)))))
                 .addContainerGap(263, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,7 +160,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(goBackButton)
-                    .addComponent(jButton1))
+                    .addComponent(saveChangesButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
@@ -134,7 +179,15 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(departmentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,22 +195,31 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         window.showEmployeesPanel();
     }//GEN-LAST:event_goBackButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void saveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_saveChangesButtonActionPerformed
+
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressTextField;
+    private javax.swing.JTextField departmentTextField;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JButton goBackButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastNameTextField;
+    private javax.swing.JList<Project> projectList;
+    private javax.swing.JButton saveChangesButton;
     // End of variables declaration//GEN-END:variables
 }
