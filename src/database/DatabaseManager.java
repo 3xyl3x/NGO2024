@@ -125,6 +125,31 @@ public class DatabaseManager {
                 return department;
             }
                             catch (InfException e) {
+            throw new RuntimeException("Fel vid hämtning av avdelning: " + e.getMessage());
+        }
+    }
+    
+        // Metod för att hämta en avdelning
+    public ArrayList<Department> getDepartments() {
+            try {
+                    ArrayList<Department> departments = new ArrayList<>();
+            String query = "SELECT * FROM avdelning";
+                ArrayList<HashMap<String, String>> results = db.fetchRows(query);
+          if (results != null) {
+                for (HashMap<String, String> row : results) {
+                   departments.add(new Department(
+                           Integer.parseInt(row.get("avdid")),
+                           row.get("namn"),
+                           row.get("beskrivning"),
+                           row.get("telefon"),
+                            row.get("adress"),
+                            row.get("epost")
+                            ));
+                }
+            }
+              return departments;
+            }
+                            catch (InfException e) {
             throw new RuntimeException("Fel vid inloggning: " + e.getMessage());
         }
     }

@@ -27,6 +27,10 @@ public class Department {
             this.address = address;
             this.email = email;
             }
+        public int getId()
+    {
+    return id;
+    }
     
     public String getName()
     {
@@ -81,6 +85,11 @@ public class Department {
     {
           this.email = email;
           System.out.println("The mail to the department has been changed to: " + this.email);
+    }
+    
+        @Override
+    public String toString() {
+        return "ID: " + id + ", Namn: " + name;
     }
 }
     
