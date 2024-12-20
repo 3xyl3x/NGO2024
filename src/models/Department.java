@@ -91,20 +91,19 @@ public class Department {
           System.out.println("The mail to the department has been changed to: " + this.mail);
     }
     
-    
     public void listAllEmployees()
     {
     System.out.println("Employees of the department " + name + ": ");
         for (Employee employee : employees) {
-            System.out.println(employee.getFirstName()); 
-    }
+            System.out.println(employee.getLastName() + ", " + employee.getFirstName()); 
+        }
     }
     
     public void listAllProjects()
     {
     System.out.println("Projects connected to the department " + name + ":");
     for (Project project : projects) {
-        System.out.println(project.getTitle()); 
+        System.out.println(project.title()); 
     }
     }
 }
