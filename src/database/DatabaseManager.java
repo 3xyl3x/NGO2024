@@ -164,29 +164,7 @@ public class DatabaseManager {
 
             if (results != null) {
                 for (HashMap<String, String> row : results) {
-                 //   projectsList.add(new Project(row.get("pid"), row.get("projektnamn"), row.get("beskrivning")));
-                }
-            }
-        } catch (InfException e) {
-            System.err.println("KUNDE INTE HÄMTA PROJEKT: " + e.getMessage());
-        }
-        return projectsList;
-    }
-    
-    
-    // Metod för att hämta projekt för en anställd
-    public ArrayList<Project> getProjectsForEmployee(int employeeID) {
-    ArrayList<Project> projectsList = new ArrayList<>();
-    String query = "SELECT p.* FROM projekt p " +
-                   "JOIN ans_proj ap ON p.pid = ap.pid " +
-                   "WHERE ap.aid = " + employeeID;
-
-    try {
-        ArrayList<HashMap<String, String>> results = db.fetchRows(query);
-
-        if (results != null) {
-            for (HashMap<String, String> row : results) {
-                projectsList.add(new Project(
+                          projectsList.add(new Project(
                     Integer.parseInt(row.get("pid")), 
                     row.get("projektnamn"), 
                     row.get("beskrivning"),
@@ -198,14 +176,16 @@ public class DatabaseManager {
                     Integer.parseInt(row.get("projektchef")), 
                     Integer.parseInt(row.get("land"))
                 ));
+                }
             }
+        } catch (InfException e) {
+            System.err.println("KUNDE INTE HÄMTA PROJEKT: " + e.getMessage());
         }
-    } catch (InfException e) {
-        System.err.println("KUNDE INTE HÄMTA PROJEKT FÖR ANSTÄLLD: " + e.getMessage());
+        return projectsList;
     }
-    return projectsList;
-}
-
+    
+    
+ 
 
 
 }
