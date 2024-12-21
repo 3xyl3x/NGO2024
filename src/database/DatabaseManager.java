@@ -207,7 +207,7 @@ public class DatabaseManager {
             return false;
         }
     }
-    
+
     //Metod för att lägga till anställd i specifikt projekt
     public boolean addEmployeeToProject(Employee employee, Project project) {
         try {
@@ -229,7 +229,7 @@ public class DatabaseManager {
             return false;
         }
     }
-    
+
     //Metod för att lägga till hållbarhetsmål i projektet
     public boolean addGoalToProject(Goals goals, Project project) {
         try {
@@ -248,6 +248,30 @@ public class DatabaseManager {
             return true;
         } catch (InfException e) {
             System.err.println("Fel vid borttagning. " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att lägga till hållbarhetsmål i avdelning
+    public boolean addGoalToDepartment(Goals goals, Department department) {
+        try {
+            db.insert("INSERT INTO avd_hallbarhet values (" + department.getId() + ", " + goals.getId() + ")");
+            return true;
+
+        } catch (InfException e) {
+            System.err.println("Hållbarthetsmålet kunde inte kopplas till avdelningen : " + e.getMessage());
+            return false;
+        }
+
+    }
+
+    //Metod för att ta bort mål från avdelning
+    public boolean deleteGoalFromDepartment(Goals goals, Department department) {
+        try {
+            db.delete("DELETE FROM avd_hallbarhet where avdid = " + department.getId() + " and hid = " + goals.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Hållbarhetsmålet kunde inte tas bort från avdelningen : " + e.getMessage());
             return false;
         }
     }
