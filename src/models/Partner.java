@@ -6,7 +6,7 @@ package models;
  */
 public class Partner {
 
-    private int partnerId;
+    private int id;
     private String name;
     private String contactPerson;
     private String contactEmail;
@@ -15,8 +15,8 @@ public class Partner {
     private String branch;
     private int city;
 
-    public Partner(int partnerId, String name, String contactPerson, String contactEmail, String phoneNumber, String adress, String branch, int city) {
-        this.partnerId = partnerId;
+    public Partner(int id, String name, String contactPerson, String contactEmail, String phoneNumber, String adress, String branch, int city) {
+        this.id = id;
         this.name = name;
         this.contactPerson = contactPerson;
         this.phoneNumber = phoneNumber;
@@ -25,8 +25,8 @@ public class Partner {
         this.city = city;
     }
 
-    public int getPartnerId() {
-        return partnerId;
+    public int getId() {
+        return id;
     }
     
     public String getName() {
@@ -87,6 +87,6 @@ public class Partner {
 
     @Override
     public String toString() {
-        return "ID: " + partnerId + ", Namn:  " + name + ", Kontaktperson:  " + contactPerson + " telefonnummer: " + phoneNumber + ".";
+        return "ID: " + id + ", Namn:  " + name + ", Kontaktperson:  " + contactPerson + " telefonnummer: " + phoneNumber + ".";
     }
 }
