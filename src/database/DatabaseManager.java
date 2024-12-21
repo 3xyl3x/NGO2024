@@ -207,12 +207,26 @@ public class DatabaseManager {
             return false;
         }
     }
+    
+    //Metod för att lägga till anställd i specifikt projekt
+    public boolean addEmployeeToProject(Employee employee, Project project) {
+        try {
+            db.insert("INSERT INTO ans_proj values (" + project.getId() + ", " + employee.getId() + ")");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Den anställde kunde inte kopplas till projektet : " + e.getMessage());
+            return false;
+        }
+    }
 
-           
-            
-            
-        
- 
-
-
+    //Metod för att ta bort en anställd fråm ett specifikt projekt
+    public boolean deleteEmployeeFromProject(Employee employee, Project project) {
+        try {
+            db.delete("DELETE FROM ans_proj where aid = " + employee.getId() + " and pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning: " + e.getMessage());
+            return false;
+        }
+    }
 }
