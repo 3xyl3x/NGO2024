@@ -33,7 +33,7 @@ public class Project {
     }
     
 
-    public int getProjectId() {
+    public int getId() {
         return id;
     }
 

@@ -185,7 +185,94 @@ public class DatabaseManager {
     }
     
     
- 
+    //Metod för att lägga in partnerns id i ett specifikt projekt 
+    public boolean addPartnerToProject(Partner partner, Project project) {
 
+        try {
+            db.insert("INSERT INTO projekt_partner values (" + project.getId() + ", " + partner.getId() + ")");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Partnern kunde inte kopplas till projektet: " + e.getMessage());
+            return false;
+        }
+    }
 
+    // Metod för att ta bort partner från ett specifikt projekt
+    public boolean DeletePartnerFromProject(Partner partner, Project project) {
+        try {
+            db.delete("DELETE FEOM projekt_partner where partner_pid = " + partner.getId() + " and pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning: " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att lägga till anställd i specifikt projekt
+    public boolean addEmployeeToProject(Employee employee, Project project) {
+        try {
+            db.insert("INSERT INTO ans_proj values (" + project.getId() + ", " + employee.getId() + ")");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Den anställde kunde inte kopplas till projektet : " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att ta bort en anställd fråm ett specifikt projekt
+    public boolean deleteEmployeeFromProject(Employee employee, Project project) {
+        try {
+            db.delete("DELETE FROM ans_proj where aid = " + employee.getId() + " and pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning: " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att lägga till hållbarhetsmål i projektet
+    public boolean addGoalToProject(Goals goals, Project project) {
+        try {
+            db.insert("INSERT INTO proj_hallbarhet values (" + project.getId() + ", " + goals.getId() + ")");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Målet kunde inte kopplas till projektet : " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att ta bort mål från projekt
+    public boolean deleteGoalFromProject(Goals goals, Project project) {
+        try {
+            db.delete("DELETE FROM proj_hallbarhet where hid = " + goals.getId() + " and pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning. " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att lägga till hållbarhetsmål i avdelning
+    public boolean addGoalToDepartment(Goals goals, Department department) {
+        try {
+            db.insert("INSERT INTO avd_hallbarhet values (" + department.getId() + ", " + goals.getId() + ")");
+            return true;
+
+        } catch (InfException e) {
+            System.err.println("Hållbarthetsmålet kunde inte kopplas till avdelningen : " + e.getMessage());
+            return false;
+        }
+
+    }
+
+    //Metod för att ta bort mål från avdelning
+    public boolean deleteGoalFromDepartment(Goals goals, Department department) {
+        try {
+            db.delete("DELETE FROM avd_hallbarhet where avdid = " + department.getId() + " and hid = " + goals.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Hållbarhetsmålet kunde inte tas bort från avdelningen : " + e.getMessage());
+            return false;
+        }
+    }
 }

@@ -30,6 +30,10 @@ this.priority = priority;
 goalsList.add(this);
 }
 
+    public int getId() {
+        return id;
+    }
+
 public void showAllInfo()
 {
     System.out.println("List of all goals:");
