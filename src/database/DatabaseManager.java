@@ -229,4 +229,26 @@ public class DatabaseManager {
             return false;
         }
     }
+    
+    //Metod för att lägga till hållbarhetsmål i projektet
+    public boolean addGoalToProject(Goals goals, Project project) {
+        try {
+            db.insert("INSERT INTO proj_hallbarhet values (" + project.getId() + ", " + goals.getId() + ")");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Målet kunde inte kopplas till projektet : " + e.getMessage());
+            return false;
+        }
+    }
+
+    //Metod för att ta bort mål från projekt
+    public boolean deleteGoalFromProject(Goals goals, Project project) {
+        try {
+            db.delete("DELETE FROM proj_hallbarhet where hid = " + goals.getId() + " and pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning. " + e.getMessage());
+            return false;
+        }
+    }
 }
