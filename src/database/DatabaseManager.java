@@ -185,6 +185,33 @@ public class DatabaseManager {
     }
     
     
+    //Metod för att lägga in partnerns id i ett specifikt projekt 
+    public boolean addPartnerToProject(Partner partner, Project project) {
+
+        try {
+            db.insert("INSERT INTO projekt_partner values (" + project.getId() + ", " + partner.getId() + ")");
+            return true;
+        } catch (InfException e) {
+            System.err.println("Partnern kunde inte kopplas till projektet: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Metod för att ta bort partner från ett specifikt projekt
+    public boolean DeletePartnerFromProject(Partner partner, Project project) {
+        try {
+            db.delete("DELETE FEOM projekt_partner where partner_pid = " + partner.getId() + " and pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Fel vid borttagning: " + e.getMessage());
+            return false;
+        }
+    }
+
+           
+            
+            
+        
  
 
 
