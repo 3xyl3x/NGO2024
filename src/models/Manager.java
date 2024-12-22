@@ -10,11 +10,19 @@ package models;
  */
 public class Manager extends Employee {
     private String responsibilityArea;
-    private Manager mentor;
+    private int mentorId;
 
-    public Manager(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate,int departmentID,String responsibilityArea,Manager mentor) {
+    public Manager(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate,int departmentID,String responsibilityArea,int mentorId) {
         super(id, firstName, lastName, address, email, phone, employmentDate,departmentID);
         this.responsibilityArea = responsibilityArea;
-        this.mentor=mentor;
+        this.mentorId=mentorId;
+    }
+    
+    public String getResponsibilityArea() {
+        return responsibilityArea;
+    }
+    
+    public int getMentorId() {
+        return mentorId;
     }
 }
