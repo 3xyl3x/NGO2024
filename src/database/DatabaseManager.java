@@ -355,4 +355,23 @@ public boolean updateEmployee(Employee employee) {
             return false;
         }
     }
+    
+    //Metod för att skapa och lägga till en ny partner
+    public Partner createPartner(String name, String contactPerson, String contactEmail, String phoneNumber, String adress, String branch, int city) {
+        try {
+            db.insert("INSERT INTO partner values (" + name + ", " + contactPerson + ", " + contactEmail + ", " + phoneNumber + ", " + adress + ", " + branch + ", " + city + ")");
+            HashMap<String, String> row = db.fetchRow("SELECT * FROM partner where namn = " + name + " and telefon = " + phoneNumber);
+            if (row != null) {
+                int pid = Integer.parseInt(row.get("pid"));
+                Partner partnern = new Partner(pid, name, contactPerson, contactEmail, phoneNumber, adress, branch, city);
+                return partnern;
+            } else {
+                return null;
+            }
+        } catch (InfException e) {
+            System.err.println("Det gick inte att lägga till en ny partner : " + e.getMessage());
+            return null;
+        }
+
+    }
 }
