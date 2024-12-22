@@ -48,7 +48,8 @@ public class DatabaseManager {
 
             if (managerRow.isEmpty() == false) {
                 String responsibilityArea = managerRow.get("ansvaromrade");
-                return new Manager(id, firstName, lastName, address, email, phone, employementDate,departmentID, responsibilityArea, null);
+                int mentorId = Integer.parseInt(managerRow.get("mentor"));
+                return new Manager(id, firstName, lastName, address, email, phone, employementDate,departmentID, responsibilityArea, mentorId);
             }
 
             // Kontrollerar om användaren är administratör
@@ -56,8 +57,8 @@ public class DatabaseManager {
             HashMap<String, String> adminRow = db.fetchRow(adminQuery);
 
             if (adminRow.isEmpty() == false) {
-                int behorighetsniva = Integer.parseInt(adminRow.get("behorighetsniva"));
-                return new Admin(id, firstName, lastName, address, email, phone, employementDate,departmentID, behorighetsniva);
+                int level = Integer.parseInt(adminRow.get("behorighetsniva"));
+                return new Admin(id, firstName, lastName, address, email, phone, employementDate,departmentID, level);
             }
 
             // Om ingen specifik roll hittas, returnera null
@@ -109,6 +110,44 @@ public class DatabaseManager {
         }
 
     }
+    
+    // Metod för att uppdatera en anställd
+public boolean updateEmployee(Employee employee) {
+    try {
+        // Uppdatera gemensamma attribut i anstalld
+        String query = "UPDATE anstalld SET " +
+                       "fornamn = '" + employee.getFirstName() + "', " +
+                       "efternamn = '" + employee.getLastName() + "', " +
+                        "adress ='" + employee.getAddress() + "', " +
+                        "telefon ='" + employee.getPhone() + "', " +
+                        "avdelning ='" + employee.getDepartmentId() + "', " +
+                       "epost = '" + employee.getEmail() + "' " +
+                       "WHERE aid = " + employee.getId();
+        db.update(query);
+
+        // Kontrollera om det är en Admin eller Manager och uppdatera specifika attribut i respektive tabell
+        if (employee instanceof Admin) {
+            Admin admin = (Admin) employee;
+            String adminQuery = "UPDATE admin SET " +
+                                "behorighetsniva = '" + admin.getLevel() + "' " +
+                                "WHERE aid = " + employee.getId();
+            db.update(adminQuery);
+        } else if (employee instanceof Manager) {
+            Manager manager = (Manager) employee;
+            String managerQuery = "UPDATE handlaggare SET " +
+                                        "ansvarighetsomrade = '" + manager.getResponsibilityArea() + "' " +
+                                  "mentor = '" + manager.getMentorId() + "' " +
+                                  "WHERE aid = " + employee.getId();
+            db.update(managerQuery);
+        }
+
+        return true; 
+    } catch (InfException e) {
+        System.err.println("Kunde inte uppdatera anställd: " + e.getMessage());
+        return false; 
+    }
+}
+
     
     // Metod för att hämta en avdelning
     public Department getDepartment(int id) {
@@ -198,7 +237,7 @@ public class DatabaseManager {
     }
 
     // Metod för att ta bort partner från ett specifikt projekt
-    public boolean DeletePartnerFromProject(Partner partner, Project project) {
+    public boolean deletePartnerFromProject(Partner partner, Project project) {
         try {
             db.delete("DELETE FEOM projekt_partner where partner_pid = " + partner.getId() + " and pid = " + project.getId());
             return true;

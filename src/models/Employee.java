@@ -57,7 +57,24 @@ public class Employee {
     public int getDepartmentId(){
         return departmentId;
     }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+        public void setPhone(String phone) {
+        this.email = phone;
+    }
     public String toString() {
         return "ID: " + id +", Avd-id: "+departmentId+", Namn: " + firstName + " " + lastName;
     }
