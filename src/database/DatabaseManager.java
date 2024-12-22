@@ -314,4 +314,19 @@ public boolean updateEmployee(Employee employee) {
             return false;
         }
     }
+
+    // Metod för att ta bort en anställd
+    public boolean deleteEmployee(Employee employee) {
+        try {
+            db.delete("DELETE FROM anstalld where aid = " + employee.getId());
+            db.delete("DELETE FROM ans_proj where aid = " + employee.getId());
+            db.delete("DELETE FROM handlaggare where aid = " + employee.getId());
+            db.delete("DELETE FROM admin where aid= " + employee.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Det gick inte att ta bort den anställda : " + e.getMessage());
+            return false;
+        }
+    }
+    
 }
