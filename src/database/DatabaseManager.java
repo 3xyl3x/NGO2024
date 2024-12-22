@@ -329,4 +329,18 @@ public boolean updateEmployee(Employee employee) {
         }
     }
     
+    // Metod för att ta bort ett projekt
+    public boolean deleteProject(Project project) {
+        try {
+            db.delete("DELETE FROM projekt where pid = " + project.getId());
+            db.delete("DELETE FROM ans_proj where pid = " + project.getId());
+            db.delete("DELETE FROM proj_hallbarhet where pid = " + project.getId());
+            db.delete("DELETE FROM projekt_partner where pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Det gick inte att ta bort projektet : " + e.getMessage());
+            return false;
+        }
+    }
+
 }
