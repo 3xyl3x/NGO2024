@@ -342,5 +342,17 @@ public boolean updateEmployee(Employee employee) {
             return false;
         }
     }
+    
+    //Metod för att ta bort en partner
+    public boolean deletePartner(Partner partner) {
+        try {
+            db.delete("DELETE FROM partner where pid = " + partner.getId());
+            db.delete("DELETE FROM projekt_partner where pid = " + partner.getId());
+            return true;
 
+        } catch (InfException e) {
+            System.err.println("Det gick inte att ta bort partnern : " + e.getMessage());
+            return false;
+        }
+    }
 }
