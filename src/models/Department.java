@@ -18,14 +18,14 @@ public class Department {
     private String address;
     private String mail;
     
-    public Department(int id, String name, String description, String phone, String address, String email)
+    public Department(int id, String name, String description, String phone, String address, String mail)
             {
             this.id = id;
             this.name = name;
             this.description = description;
             this.phone = phone;
             this.address = address;
-            this.email = email;
+            this.mail = mail;
             }
     
     public String getName()
