@@ -17,6 +17,7 @@ public class Validator {
        return (textField.getText().isEmpty()==false);
     }
     
+    //kontroll med utskrift
        public static void main(String[] args) {
         String email = "example@mail.com";
         String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-zA-Z]{2,}$";
@@ -29,4 +30,11 @@ public class Validator {
             System.out.println("Invalid mail");
         }
        }
+
+       // alternativ med endast booelan
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-zA-Z]{2,}$";
+        return Pattern.matches(emailRegex, email);
+    }
+    
 }
