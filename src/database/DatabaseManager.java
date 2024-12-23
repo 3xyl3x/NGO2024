@@ -181,6 +181,14 @@ public class DatabaseManager {
     return projectsList;
 }
     
+    //metod för att hämta alla hållbarhetsmål
+               
+    public ArrayList<Goal> getAllGoals() {
+              ArrayList<Goal> goalsList = new ArrayList<>();
+                    return goalsList;
+                }
+    
+    
     // Metod för att hämta alla hållbarhetsmål för en avdelning (ej join)
     public ArrayList<Goal> getGoalsForDepartment(int departmentId) {
  ArrayList<Goal> goalsList = new ArrayList<>();
