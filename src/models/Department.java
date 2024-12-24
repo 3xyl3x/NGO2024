@@ -16,16 +16,16 @@ public class Department {
     private String description;
     private String phone;
     private String address;
-    private String mail;
+    private String email;
     
-    public Department(int id, String name, String description, String phone, String address, String mail)
+    public Department(int id, String name, String description, String phone, String address, String email)
             {
             this.id = id;
             this.name = name;
             this.description = description;
             this.phone = phone;
             this.address = address;
-            this.mail = mail;
+            this.email = email;
             }
     
     public String getName()
@@ -50,7 +50,7 @@ public class Department {
     
     public String getEmail()
     {
-            return mail;
+            return email;
     }
     
     public void setName(String name)
@@ -79,7 +79,7 @@ public class Department {
     
     public void setMail(String mail)
     {
-          this.mail = mail;
-          System.out.println("The mail to the department has been changed to: " + this.mail);
+          this.email = email;
+          System.out.println("The mail to the department has been changed to: " + this.email);
     }
 }

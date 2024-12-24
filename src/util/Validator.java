@@ -4,11 +4,9 @@ import java.util.regex.Pattern;
 
 public class Validator {
     
-
-    //kontroll med utskrift
-       public static void main(String[] args) {
-
-       }
+        public Validator() {
+            
+        }
 
     public static boolean textFieldHasValue(JTextField textField) {
        return (textField.getText().isEmpty()==false);
