@@ -35,19 +35,19 @@ public class LoginPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inputEmail = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        inputPassword = new javax.swing.JPasswordField();
+        passwordTextField = new javax.swing.JPasswordField();
         DEVprefillManagerButton = new javax.swing.JButton();
         DEVprefillAdminButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
-        inputEmail.addActionListener(new java.awt.event.ActionListener() {
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputEmailActionPerformed(evt);
+                emailTextFieldActionPerformed(evt);
             }
         });
 
@@ -92,8 +92,8 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inputEmail)
-                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailTextField)
+                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(200, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,24 +106,24 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(DEVprefillAdminButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginButton)
                 .addContainerGap(290, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputEmailActionPerformed
+    }//GEN-LAST:event_emailTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-       if(textFieldHasValue(inputEmail)&& textFieldHasValue(inputPassword)) {
-           Employee user = dbm.login(inputEmail.getText(),inputPassword.getText()); 
+       if(textFieldHasValue(emailTextField)&& textFieldHasValue(passwordTextField)) {
+           Employee user = dbm.login(emailTextField.getText(),passwordTextField.getText()); 
            if (user!=null) {
                 window.setUser(user);
                 window.showStartPanel();
@@ -136,23 +136,23 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void DEVprefillManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEVprefillManagerButtonActionPerformed
-        inputEmail.setText("chen.liu@example.com");
-        inputPassword.setText("passwordabc");
+        emailTextField.setText("chen.liu@example.com");
+        passwordTextField.setText("passwordabc");
     }//GEN-LAST:event_DEVprefillManagerButtonActionPerformed
 
     private void DEVprefillAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEVprefillAdminButtonActionPerformed
-           inputEmail.setText("michael.j@example.com");
-        inputPassword.setText("password789");
+           emailTextField.setText("fatima.alm@example.com");
+        passwordTextField.setText("passwordxyz");
     }//GEN-LAST:event_DEVprefillAdminButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DEVprefillAdminButton;
     private javax.swing.JButton DEVprefillManagerButton;
-    private javax.swing.JTextField inputEmail;
-    private javax.swing.JPasswordField inputPassword;
+    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
+    private javax.swing.JPasswordField passwordTextField;
     // End of variables declaration//GEN-END:variables
 }

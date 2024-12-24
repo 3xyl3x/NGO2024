@@ -17,8 +17,8 @@ public class Employee {
     private String email;
     private String phone;
     private String employmentDate;
-    private int departmentID;
-    public Employee(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate,int departmentID) {
+    private int departmentId;
+    public Employee(int id, String firstName, String lastName,String address, String email, String phone, String employmentDate,int departmentId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,7 +26,7 @@ public class Employee {
         this.email= email;
         this.phone = phone;
         this.employmentDate = employmentDate;
-        this.departmentID = departmentID;
+        this.departmentId = departmentId;
     }
     
       public int getId() {
@@ -54,10 +54,28 @@ public class Employee {
     public String getEmploymentDate() {
         return employmentDate;
     }
-    public int getDepartmentID(){
-        return departmentID;
+    public int getDepartmentId(){
+        return departmentId;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+        public void setPhone(String phone) {
+        this.email = phone;
     }
     public String toString() {
-        return "ID: " + id + ", Namn: " + firstName + " " + lastName;
+        return "ID: " + id +", Avd-id: "+departmentId+", Namn: " + firstName + " " + lastName;
     }
 }

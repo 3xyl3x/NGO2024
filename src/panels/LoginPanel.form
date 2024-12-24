@@ -32,8 +32,8 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Component id="loginButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputEmail" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputPassword" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="emailTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="passwordTextField" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="200" max="32767" attributes="0"/>
           </Group>
@@ -50,11 +50,11 @@
                   <Component id="DEVprefillAdminButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="inputEmail" min="-2" max="-2" attributes="0"/>
+              <Component id="emailTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="inputPassword" min="-2" max="-2" attributes="0"/>
+              <Component id="passwordTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="loginButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="290" max="32767" attributes="0"/>
@@ -63,9 +63,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="inputEmail">
+    <Component class="javax.swing.JTextField" name="emailTextField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputEmailActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailTextFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="loginButton">
@@ -86,7 +86,7 @@
         <Property name="text" type="java.lang.String" value="L&#xf6;senord:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="inputPassword">
+    <Component class="javax.swing.JPasswordField" name="passwordTextField">
     </Component>
     <Component class="javax.swing.JButton" name="DEVprefillManagerButton">
       <Properties>

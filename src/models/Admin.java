@@ -15,4 +15,8 @@ public class Admin extends Employee {
         super(id, firstName, lastName, address, email, phone, employmentDate,departmentID);
         this.level=level;
     }
+    
+       public int getLevel() {
+           return level;
+       }
 }

@@ -1,25 +1,31 @@
 package panels;
 
+import database.DatabaseManager;
+import java.util.ArrayList;
 import models.*;
+import util.Constants.Role;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-
-/**
- *
- * @author david
- */
 public class StartPanel extends javax.swing.JPanel {
  private MainWindow window;
-    /**
-     * Creates new form StartPanel
-     */
+ private DatabaseManager dbm;
+ private ArrayList<Goals> SDG;
+
     public StartPanel(MainWindow window,Employee user) {
         this.window=window;
+        this.dbm = window.getDBM();
+       
+        this.SDG= new ArrayList<>();
+         //this.SDG = dbm.getGoals();
+        //SDG.add(new Goal());
         initComponents();
-        welcomeLabel.setText("Välkommen "+user.getFirstName() );
+        nameDynamicLabel.setText(user.getFirstName()+" "+user.getLastName());
+        
+        // Justera texter beroende på roll
+        if (window.getUserRole()==Role.MANAGER) {
+            roleDynamicLabel.setText("Handläggare");
+        } else {
+            roleDynamicLabel.setText("Administratör");
+        }
     }
 
     /**
@@ -36,9 +42,15 @@ public class StartPanel extends javax.swing.JPanel {
         logoutButton = new javax.swing.JButton();
         welcomeLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        roleLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jLabel2 = new javax.swing.JLabel();
+        projectsButton1 = new javax.swing.JButton();
+        projectsButton2 = new javax.swing.JButton();
+        nameDynamicLabel = new javax.swing.JLabel();
+        roleDynamicLabel = new javax.swing.JLabel();
 
         employeesButton.setBackground(new java.awt.Color(0, 0, 153));
         employeesButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -54,6 +66,7 @@ public class StartPanel extends javax.swing.JPanel {
         projectsButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         projectsButton.setForeground(new java.awt.Color(255, 255, 255));
         projectsButton.setText("Projekt");
+        projectsButton.setEnabled(false);
         projectsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projectsButtonActionPerformed(evt);
@@ -77,47 +90,113 @@ public class StartPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Din avdelning:");
+        roleLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        roleLabel.setText("Roll:");
 
-        jLabel2.setText("Dina tilldelade projekt");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setToolTipText("tetew");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Hålbarhetsmålen:");
+
+        jScrollBar1.setMaximum(10);
+        jScrollBar1.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
+        jScrollBar1.setValue(1);
+        jScrollBar1.setVisibleAmount(1);
+        jScrollBar1.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
+            public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
+                jScrollBar1AdjustmentValueChanged(evt);
+            }
+        });
+
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+            .addComponent(jScrollBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 233, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        projectsButton1.setBackground(new java.awt.Color(0, 153, 0));
+        projectsButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        projectsButton1.setForeground(new java.awt.Color(255, 255, 255));
+        projectsButton1.setText("Partners");
+        projectsButton1.setEnabled(false);
+        projectsButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectsButton1ActionPerformed(evt);
+            }
+        });
+
+        projectsButton2.setBackground(new java.awt.Color(0, 153, 0));
+        projectsButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        projectsButton2.setForeground(new java.awt.Color(255, 255, 255));
+        projectsButton2.setText("Avdelningar");
+        projectsButton2.setEnabled(false);
+        projectsButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectsButton2ActionPerformed(evt);
+            }
+        });
+
+        nameDynamicLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        nameDynamicLabel.setText("nameDynamicLabel");
+
+        roleDynamicLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        roleDynamicLabel.setText("roleDynamicLabel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(welcomeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(roleLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(roleDynamicLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(welcomeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameDynamicLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(projectsButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(projectsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(99, 99, 99))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,18 +205,21 @@ public class StartPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcomeLabel)
                     .addComponent(logoutButton)
-                    .addComponent(jButton1))
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                    .addComponent(jButton1)
+                    .addComponent(nameDynamicLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(roleLabel)
+                    .addComponent(roleDynamicLabel))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(projectsButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(projectsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,6 +239,18 @@ public class StartPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void projectsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectsButton1ActionPerformed
+
+    private void projectsButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_projectsButton2ActionPerformed
+
+    private void jScrollBar1AdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_jScrollBar1AdjustmentValueChanged
+       System.out.println(evt.getValue());
+    }//GEN-LAST:event_jScrollBar1AdjustmentValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton employeesButton;
@@ -164,8 +258,14 @@ public class StartPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JLabel nameDynamicLabel;
     private javax.swing.JButton projectsButton;
+    private javax.swing.JButton projectsButton1;
+    private javax.swing.JButton projectsButton2;
+    private javax.swing.JLabel roleDynamicLabel;
+    private javax.swing.JLabel roleLabel;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

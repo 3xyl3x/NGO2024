@@ -6,7 +6,7 @@ package models;
  */
 public class Country {
 
-    private int countryId;
+    private int id;
     private String name;
     private String language;
     private double currency;
@@ -14,8 +14,8 @@ public class Country {
     private String politicalStructure;
     private String economy;
 
-    public Country(int countryId, String name, String language, double currency, String timeZone, String politicalStructure, String economy) {
-        this.countryId = countryId;
+    public Country(int id, String name, String language, double currency, String timeZone, String politicalStructure, String economy) {
+        this.id = id;
         this.name = name;
         this.language = language;
         this.currency = currency;
@@ -24,8 +24,8 @@ public class Country {
         this.economy = economy;
     }
 
-    public int getCountryId() {
-        return countryId;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -78,6 +78,6 @@ public class Country {
 
     @Override
     public String toString() {
-        return "ID: " + countryId + ", Namn: " + name + ", Språk: " + language + ", Politisk struktur: " + politicalStructure + ".";
+        return "ID: " + id + ", Namn: " + name + ", Språk: " + language + ", Politisk struktur: " + politicalStructure + ".";
     }
 }
