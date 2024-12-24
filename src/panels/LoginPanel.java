@@ -141,8 +141,8 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_DEVprefillManagerButtonActionPerformed
 
     private void DEVprefillAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DEVprefillAdminButtonActionPerformed
-           emailTextField.setText("michael.j@example.com");
-        passwordTextField.setText("password789");
+           emailTextField.setText("fatima.alm@example.com");
+        passwordTextField.setText("passwordxyz");
     }//GEN-LAST:event_DEVprefillAdminButtonActionPerformed
 
 

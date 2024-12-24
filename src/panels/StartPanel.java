@@ -1,32 +1,30 @@
 package panels;
 
+import database.DatabaseManager;
+import java.util.ArrayList;
 import models.*;
 import util.Constants.Role;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-
-/**
- *
- * @author david
- */
 public class StartPanel extends javax.swing.JPanel {
  private MainWindow window;
-    /**
-     * Creates new form StartPanel
-     */
+ private DatabaseManager dbm;
+ private ArrayList<Goals> SDG;
+
     public StartPanel(MainWindow window,Employee user) {
         this.window=window;
+        this.dbm = window.getDBM();
+       
+        this.SDG= new ArrayList<>();
+         //this.SDG = dbm.getGoals();
+        //SDG.add(new Goal());
         initComponents();
-        welcomeLabel.setText("Välkommen "+user.getFirstName()+" "+user.getLastName()  );
+        nameDynamicLabel.setText(user.getFirstName()+" "+user.getLastName());
         
         // Justera texter beroende på roll
         if (window.getUserRole()==Role.MANAGER) {
-            roleLabel.setText("Roll: Handläggare");
+            roleDynamicLabel.setText("Handläggare");
         } else {
-            roleLabel.setText("Roll: Administratör");
+            roleDynamicLabel.setText("Administratör");
         }
     }
 
@@ -47,9 +45,12 @@ public class StartPanel extends javax.swing.JPanel {
         roleLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jLabel2 = new javax.swing.JLabel();
         projectsButton1 = new javax.swing.JButton();
         projectsButton2 = new javax.swing.JButton();
+        nameDynamicLabel = new javax.swing.JLabel();
+        roleDynamicLabel = new javax.swing.JLabel();
 
         employeesButton.setBackground(new java.awt.Color(0, 0, 153));
         employeesButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -97,23 +98,29 @@ public class StartPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Hålbarhetsmålen:");
 
-        jButton2.setText("#1 Inga fattiga");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jScrollBar1.setMaximum(10);
+        jScrollBar1.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
+        jScrollBar1.setValue(1);
+        jScrollBar1.setVisibleAmount(1);
+        jScrollBar1.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
+            public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
+                jScrollBar1AdjustmentValueChanged(evt);
             }
         });
+
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel1))
-                .addContainerGap(415, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,8 +128,9 @@ public class StartPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         projectsButton1.setBackground(new java.awt.Color(0, 153, 0));
@@ -147,6 +155,12 @@ public class StartPanel extends javax.swing.JPanel {
             }
         });
 
+        nameDynamicLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        nameDynamicLabel.setText("nameDynamicLabel");
+
+        roleDynamicLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        roleDynamicLabel.setText("roleDynamicLabel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,8 +168,8 @@ public class StartPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,15 +177,16 @@ public class StartPanel extends javax.swing.JPanel {
                                 .addGap(6, 6, 6)
                                 .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
+                                .addComponent(projectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(roleLabel)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(welcomeLabel)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(186, 186, 186)))
+                                .addComponent(roleLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(roleDynamicLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(welcomeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameDynamicLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
@@ -190,9 +205,12 @@ public class StartPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcomeLabel)
                     .addComponent(logoutButton)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(nameDynamicLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(roleLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(roleLabel)
+                    .addComponent(roleDynamicLabel))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(employeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +219,7 @@ public class StartPanel extends javax.swing.JPanel {
                     .addComponent(projectsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -221,10 +239,6 @@ public class StartPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void projectsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_projectsButton1ActionPerformed
@@ -233,17 +247,24 @@ public class StartPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_projectsButton2ActionPerformed
 
+    private void jScrollBar1AdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_jScrollBar1AdjustmentValueChanged
+       System.out.println(evt.getValue());
+    }//GEN-LAST:event_jScrollBar1AdjustmentValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton employeesButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JLabel nameDynamicLabel;
     private javax.swing.JButton projectsButton;
     private javax.swing.JButton projectsButton1;
     private javax.swing.JButton projectsButton2;
+    private javax.swing.JLabel roleDynamicLabel;
     private javax.swing.JLabel roleLabel;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
