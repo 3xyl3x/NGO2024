@@ -23,11 +23,25 @@ public class Validator {
         String input = textField.getText();
         String forbiddeninput = "'|\"|;|--|\\b(SELECT|INSERT|DELETE|DROP|UPDATE|ALTER|CREATE|WHERE)\"\b,";
        
-        if(input.contains(forbiddeninput)) {
+        if(input.matches(forbiddeninput)) {
         return false;
     }
         else{
     return true;
+        }
+    }
+    
+    // kontroll av korrekt inmatat telefonnummer
+    public static boolean textFieldIsPhone (JTextField textField) {
+        String input = textField.getText();
+        
+        String correctPhone = "^[0-9-]{7,15}$";
+        if(input.matches(correctPhone)) {
+            return true;
+        }
+
+        else{
+   return false;
         }
     }
 }
