@@ -26,6 +26,7 @@ public class Validator {
         if(input.matches(forbiddeninput)) {
         return false;
     }
+        
         else{
     return true;
         }
