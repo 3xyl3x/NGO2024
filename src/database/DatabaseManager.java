@@ -314,4 +314,64 @@ public boolean updateEmployee(Employee employee) {
             return false;
         }
     }
+
+    // Metod för att ta bort en anställd
+    public boolean deleteEmployee(Employee employee) {
+        try {
+            db.delete("DELETE FROM anstalld where aid = " + employee.getId());
+            db.delete("DELETE FROM ans_proj where aid = " + employee.getId());
+            db.delete("DELETE FROM handlaggare where aid = " + employee.getId());
+            db.delete("DELETE FROM admin where aid= " + employee.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Det gick inte att ta bort den anställda : " + e.getMessage());
+            return false;
+        }
+    }
+    
+    // Metod för att ta bort ett projekt
+    public boolean deleteProject(Project project) {
+        try {
+            db.delete("DELETE FROM projekt where pid = " + project.getId());
+            db.delete("DELETE FROM ans_proj where pid = " + project.getId());
+            db.delete("DELETE FROM proj_hallbarhet where pid = " + project.getId());
+            db.delete("DELETE FROM projekt_partner where pid = " + project.getId());
+            return true;
+        } catch (InfException e) {
+            System.err.println("Det gick inte att ta bort projektet : " + e.getMessage());
+            return false;
+        }
+    }
+    
+    //Metod för att ta bort en partner
+    public boolean deletePartner(Partner partner) {
+        try {
+            db.delete("DELETE FROM partner where pid = " + partner.getId());
+            db.delete("DELETE FROM projekt_partner where pid = " + partner.getId());
+            return true;
+
+        } catch (InfException e) {
+            System.err.println("Det gick inte att ta bort partnern : " + e.getMessage());
+            return false;
+        }
+    }
+    
+    //Metod för att skapa och lägga till en ny partner
+    public Partner createPartner(String name, String contactPerson, String contactEmail, String phoneNumber, String adress, String branch, int city) {
+        try {
+            db.insert("INSERT INTO partner values (" + name + ", " + contactPerson + ", " + contactEmail + ", " + phoneNumber + ", " + adress + ", " + branch + ", " + city + ")");
+            HashMap<String, String> row = db.fetchRow("SELECT * FROM partner where namn = " + name + " and telefon = " + phoneNumber);
+            if (row != null) {
+                int pid = Integer.parseInt(row.get("pid"));
+                Partner partnern = new Partner(pid, name, contactPerson, contactEmail, phoneNumber, adress, branch, city);
+                return partnern;
+            } else {
+                return null;
+            }
+        } catch (InfException e) {
+            System.err.println("Det gick inte att lägga till en ny partner : " + e.getMessage());
+            return null;
+        }
+
+    }
 }
