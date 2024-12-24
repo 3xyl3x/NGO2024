@@ -190,6 +190,7 @@ public class DatabaseManager {
     
     
     // Metod för att hämta alla hållbarhetsmål för en avdelning (ej join)
+    /*
     public ArrayList<Goal> getGoalsForDepartment(int departmentId) {
  ArrayList<Goal> goalsList = new ArrayList<>();
  
@@ -201,4 +202,7 @@ public class DatabaseManager {
                     
             return goalsList;
         }
+
+}
+*/
 }
