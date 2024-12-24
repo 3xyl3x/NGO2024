@@ -8,7 +8,7 @@ import util.Constants.Role;
 public class StartPanel extends javax.swing.JPanel {
  private MainWindow window;
  private DatabaseManager dbm;
- private ArrayList<Goals> SDG;
+ private ArrayList<Goal> SDG;
 
     public StartPanel(MainWindow window,Employee user) {
         this.window=window;

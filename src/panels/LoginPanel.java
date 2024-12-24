@@ -4,15 +4,6 @@ import models.*;
 import static util.ErrorHandler.*;
 import static util.Validator.*;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-
-/**
- *
- * @author david
- */
 
 public class LoginPanel extends javax.swing.JPanel {
     private MainWindow window;

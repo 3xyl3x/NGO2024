@@ -270,9 +270,9 @@ public boolean updateEmployee(Employee employee) {
     }
 
     //Metod för att lägga till hållbarhetsmål i projektet
-    public boolean addGoalToProject(Goals goals, Project project) {
+    public boolean addGoalToProject(Goal goal, Project project) {
         try {
-            db.insert("INSERT INTO proj_hallbarhet values (" + project.getId() + ", " + goals.getId() + ")");
+            db.insert("INSERT INTO proj_hallbarhet values (" + project.getId() + ", " + goal.getId() + ")");
             return true;
         } catch (InfException e) {
             System.err.println("Målet kunde inte kopplas till projektet : " + e.getMessage());
@@ -281,9 +281,9 @@ public boolean updateEmployee(Employee employee) {
     }
 
     //Metod för att ta bort mål från projekt
-    public boolean deleteGoalFromProject(Goals goals, Project project) {
+    public boolean deleteGoalFromProject(Goal goal, Project project) {
         try {
-            db.delete("DELETE FROM proj_hallbarhet where hid = " + goals.getId() + " and pid = " + project.getId());
+            db.delete("DELETE FROM proj_hallbarhet where hid = " + goal.getId() + " and pid = " + project.getId());
             return true;
         } catch (InfException e) {
             System.err.println("Fel vid borttagning. " + e.getMessage());
@@ -292,9 +292,9 @@ public boolean updateEmployee(Employee employee) {
     }
 
     //Metod för att lägga till hållbarhetsmål i avdelning
-    public boolean addGoalToDepartment(Goals goals, Department department) {
+    public boolean addGoalToDepartment(Goal goal, Department department) {
         try {
-            db.insert("INSERT INTO avd_hallbarhet values (" + department.getId() + ", " + goals.getId() + ")");
+            db.insert("INSERT INTO avd_hallbarhet values (" + department.getId() + ", " + goal.getId() + ")");
             return true;
 
         } catch (InfException e) {
@@ -305,9 +305,9 @@ public boolean updateEmployee(Employee employee) {
     }
 
     //Metod för att ta bort mål från avdelning
-    public boolean deleteGoalFromDepartment(Goals goals, Department department) {
+    public boolean deleteGoalFromDepartment(Goal goal, Department department) {
         try {
-            db.delete("DELETE FROM avd_hallbarhet where avdid = " + department.getId() + " and hid = " + goals.getId());
+            db.delete("DELETE FROM avd_hallbarhet where avdid = " + department.getId() + " and hid = " + goal.getId());
             return true;
         } catch (InfException e) {
             System.err.println("Hållbarhetsmålet kunde inte tas bort från avdelningen : " + e.getMessage());
@@ -375,15 +375,15 @@ public boolean updateEmployee(Employee employee) {
 
     }
 
-}
-    
+
+}   
     //metod för att hämta alla hållbarhetsmål
-               
+               /*
     public ArrayList<Goal> getAllGoals() {
               ArrayList<Goal> goalsList = new ArrayList<>();
                     return goalsList;
                 }
-    
+}
     
     // Metod för att hämta alla hållbarhetsmål för en avdelning (ej join)
     /*
