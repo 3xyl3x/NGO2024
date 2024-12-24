@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package models;
 
-/**
- *
- * @author leia
- */
+
 
 
 public class Department {
@@ -27,6 +21,9 @@ public class Department {
             this.address = address;
             this.email = email;
             }
+
+
+
         public int getId()
     {
     return id;
@@ -75,13 +72,13 @@ public class Department {
           System.out.println("The phonenumber of the department has been changed to: " + this.phone);
     }
     
-    public void setAdress(String address)
+
+    public void setAddress(String adress)
     {
-          this.address = address;
-          System.out.println("The departments adress has been changed to: " + this.address);
+          this.address = adress;
+
     }
-    
-    public void setMail(String email)
+    public void setEmail(String email)
     {
           this.email = email;
           System.out.println("The mail to the department has been changed to: " + this.email);

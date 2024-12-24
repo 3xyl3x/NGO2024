@@ -374,4 +374,30 @@ public boolean updateEmployee(Employee employee) {
         }
 
     }
+
 }
+    
+    //metod för att hämta alla hållbarhetsmål
+               
+    public ArrayList<Goal> getAllGoals() {
+              ArrayList<Goal> goalsList = new ArrayList<>();
+                    return goalsList;
+                }
+    
+    
+    // Metod för att hämta alla hållbarhetsmål för en avdelning (ej join)
+    /*
+    public ArrayList<Goal> getGoalsForDepartment(int departmentId) {
+ ArrayList<Goal> goalsList = new ArrayList<>();
+ 
+ for (int[] mapping : goalDepartmentMapping) {
+        if (mapping[1] == departmentId) {
+            for (Goal goal : goals) {
+                if (goal.getId() == mapping[0]) {
+                    goalsList.add(goal);      
+                    
+            return goalsList;
+        }
+
+}
+*/
