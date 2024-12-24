@@ -18,7 +18,7 @@ public class Validator {
         return Pattern.matches(emailRegex, textField.getText());
     }
     
-    // kontroll av icke skadlig kod
+    // kontroll av skadlig kod
     public static boolean textFieldIsClean (JTextField textField) {
         String input = textField.getText();
         String forbiddeninput = "'|\"|;|--|\\b(SELECT|INSERT|DELETE|DROP|UPDATE|ALTER|CREATE|WHERE)\"\b,";
